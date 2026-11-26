@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>KylinMD · Markdown Editor Online</title>
+  <meta name="description" content="KylinMD is a free Markdown editor online with live preview. Export to Markdown, PDF, Word, or HTML; works offline.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="assets/md-logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/md-logo.png" sizes="180x180">
+  <link rel="canonical" href="./">
+  <link rel="alternate" hreflang="en" href="./">
+  <link rel="alternate" hreflang="zh-Hans" href="zh.html">
+  <link rel="alternate" hreflang="zh-Hant" href="zh-hant.html">
+  <link rel="alternate" hreflang="x-default" href="./">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="KylinMD Editor">
+  <meta property="og:title" content="KylinMD · Markdown Editor Online">
+  <meta property="og:description" content="KylinMD is a free Markdown editor online with live preview. Export to Markdown, PDF, Word, or HTML; works offline.">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"KylinMD Editor","alternateName":"Markdown Editor Online","description":"KylinMD is a free Markdown editor online with live preview. Export to Markdown, PDF, Word, or HTML; works offline.","applicationCategory":"ProductivityApplication","operatingSystem":"Web","inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="lib/github.min.css" id="hljs-light">
+  <link rel="stylesheet" href="lib/github-dark.min.css" id="hljs-dark" disabled>
+</head>
+<body data-view="preview">
+  <a class="skip-link" href="#editor" data-i18n="a11y.skip">Skip to editor</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="assets/md-logo.svg" alt="" width="34" height="34" decoding="async">
+      <div class="brand-text">
+        <h1 data-i18n="app.title">KylinMD Editor</h1>
+        <p data-i18n="app.subtitle">Online editor · Live preview</p>
+      </div>
+    </div>
+
+    <div class="toolbar" id="toolbar" role="toolbar" aria-orientation="horizontal"
+         aria-label="Formatting toolbar" data-i18n-aria="tb.toolbar">
+      <div class="tb-group">
+        <button type="button" class="tb-btn" data-action="h1" data-i18n-title="tb.h1" data-i18n-aria="tb.h1" data-aria-prefix="text" title="Heading 1">H1</button>
+        <button type="button" class="tb-btn" data-action="h2" data-i18n-title="tb.h2" data-i18n-aria="tb.h2" data-aria-prefix="text" title="Heading 2">H2</button>
+        <button type="button" class="tb-btn" data-action="h3" data-i18n-title="tb.h3" data-i18n-aria="tb.h3" data-aria-prefix="text" title="Heading 3">H3</button>
+      </div>
+      <div class="tb-group">
+        <button type="button" class="tb-btn tb-b" data-action="bold" data-i18n-title="tb.bold" data-i18n-aria="tb.bold" data-aria-prefix="text" title="Bold">B</button>
+        <button type="button" class="tb-btn tb-i" data-action="italic" data-i18n-title="tb.italic" data-i18n-aria="tb.italic" data-aria-prefix="text" title="Italic">I</button>
+        <button type="button" class="tb-btn tb-s" data-action="strike" data-i18n-title="tb.strike" data-i18n-aria="tb.strike" data-aria-prefix="text" title="Strikethrough">S</button>
+        <button type="button" class="tb-btn tb-mono" data-action="code" data-i18n-title="tb.code" data-i18n-aria="tb.code" data-aria-prefix="text" title="Inline code">&lt;/&gt;</button>
+      </div>
+      <div class="tb-group">
+        <button type="button" class="tb-btn" data-action="link" data-i18n-title="tb.link" data-i18n-aria="tb.link" data-aria-prefix="text" title="Insert link"><span data-i18n="tb.linkLabel">Link</span></button>
+        <button type="button" class="tb-btn" data-action="image" data-i18n-title="tb.image" data-i18n-aria="tb.image" data-aria-prefix="text" title="Insert image"><span data-i18n="tb.imageLabel">Image</span></button>
+        <button type="button" class="tb-btn" data-action="quote" data-i18n-title="tb.quote" data-i18n-aria="tb.quote" data-aria-prefix="text" title="Blockquote"><span data-i18n="tb.quoteLabel">Quote</span></button>
+      </div>
+      <div class="tb-group">
+        <button type="button" class="tb-btn" data-action="ul" data-i18n-title="tb.ul" data-i18n-aria="tb.ul" data-aria-prefix="text" title="Bulleted list"><span data-i18n="tb.ulLabel">Bullets</span></button>
+        <button type="button" class="tb-btn" data-action="ol" data-i18n-title="tb.ol" data-i18n-aria="tb.ol" data-aria-prefix="text" title="Numbered list"><span data-i18n="tb.olLabel">Numbers</span></button>
+        <button type="button" class="tb-btn" data-action="task" data-i18n-title="tb.task" data-i18n-aria="tb.task" data-aria-prefix="text" title="Task list"><span data-i18n="tb.taskLabel">Task</span></button>
+        <button type="button" class="tb-btn" data-action="table" data-i18n-title="tb.table" data-i18n-aria="tb.table" data-aria-prefix="text" title="Insert table"><span data-i18n="tb.tableLabel">Table</span></button>
+        <button type="button" class="tb-btn" data-action="codeblock" data-i18n-title="tb.codeblock" data-i18n-aria="tb.codeblock" data-aria-prefix="text" title="Code block"><span data-i18n="tb.codeblockLabel">Code</span></button>
+        <button type="button" class="tb-btn" data-action="hr" data-i18n-title="tb.hr" data-i18n-aria="tb.hr" data-aria-prefix="text" title="Horizontal rule"><span data-i18n="tb.hrLabel">Divider</span></button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="dropdown" id="file-dropdown">
+        <button type="button" class="btn btn-ghost" id="btn-file"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="file-menu">
+          <span data-i18n="file.title">File</span>
+          <svg class="caret" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" focusable="false"><path d="M3.6 6.1 8 10.4l4.4-4.3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown-menu" id="file-menu" role="menu" aria-labelledby="btn-file">
+          <button type="button" class="dropdown-item" data-file="open" role="menuitem" tabindex="-1">
+            <span class="item-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h4l2 2h9a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 19.5 20h-15A1.5 1.5 0 0 1 3 18.5z"/><path d="M3 10.5h18"/></svg>
+            </span><span data-i18n="file.open">Open local file</span>
+          </button>
+          <button type="button" class="dropdown-item" data-file="clear" role="menuitem" tabindex="-1">
+            <span class="item-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M4 7h16"/><path d="M9.5 7V5.5A1.5 1.5 0 0 1 11 4h2a1.5 1.5 0 0 1 1.5 1.5V7"/><path d="M6.5 7l.8 11.2A1.8 1.8 0 0 0 9.1 20h5.8a1.8 1.8 0 0 0 1.8-1.8L17.5 7"/><path d="M10.5 11v5M13.5 11v5"/></svg>
+            </span><span data-i18n="file.clear">Clear content</span>
+          </button>
+          <button type="button" class="dropdown-item" data-file="reset" role="menuitem" tabindex="-1">
+            <span class="item-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M4 5.5v5h5"/><path d="M4.6 10.4A7.5 7.5 0 1 1 5 15.5"/></svg>
+            </span><span data-i18n="file.reset">Restore default content</span>
+          </button>
+        </div>
+      </div>
+      <div class="dropdown" id="export-dropdown">
+        <button type="button" class="btn btn-primary" id="btn-export"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="export-menu">
+          <span data-i18n="export.title">Export</span>
+          <svg class="caret" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" focusable="false"><path d="M3.6 6.1 8 10.4l4.4-4.3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown-menu" id="export-menu" role="menu" aria-labelledby="btn-export">
+          <button type="button" class="dropdown-item" data-export="md" role="menuitem" tabindex="-1">
+            <span class="item-ico" aria-hidden="true">MD</span><span data-i18n="export.md">Markdown (.md)</span>
+          </button>
+          <button type="button" class="dropdown-item" data-export="pdf" role="menuitem" tabindex="-1">
+            <span class="item-ico" aria-hidden="true">PDF</span><span data-i18n="export.pdf">PDF (.pdf)</span>
+          </button>
+          <button type="button" class="dropdown-item" data-export="word" role="menuitem" tabindex="-1">
+            <span class="item-ico" aria-hidden="true">W</span><span data-i18n="export.word">Word (.docx)</span>
+          </button>
+          <button type="button" class="dropdown-item" data-export="html" role="menuitem" tabindex="-1">
+            <span class="item-ico item-ico-sm" aria-hidden="true">HTML</span><span data-i18n="export.html">HTML (.html)</span>
+          </button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-ghost" id="btn-settings"
+              aria-label="Settings" data-i18n-aria="settings.title" aria-haspopup="dialog">
+        <svg class="gear" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.61-.22l-2.39.96a7.03 7.03 0 0 0-1.62-.94l-.36-2.54A.5.5 0 0 0 13.9 2h-3.8a.5.5 0 0 0-.49.42l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96a.5.5 0 0 0-.61.22L2.71 8.48a.5.5 0 0 0 .12.64l2.03 1.58c-.05.3-.07.62-.07.94 0 .32.02.64.07.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.14.23.4.32.61.22l2.39-.96c.49.38 1.03.7 1.62.94l.36 2.54c.05.24.26.42.49.42h3.8c.24 0 .44-.18.49-.42l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.1.47 0 .61-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2Z"/></svg>
+        <span class="btn-label" data-i18n="settings.title">Settings</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="view-switch" id="view-switch" role="group"
+       aria-label="Switch view" data-i18n-aria="view.label">
+    <button type="button" class="vs-btn" data-view="editor" aria-pressed="false"
+            aria-controls="pane-editor" tabindex="-1">
+      <span data-i18n="view.editor">Edit</span>
+    </button>
+    <button type="button" class="vs-btn" data-view="preview" aria-pressed="true"
+            aria-controls="pane-preview" tabindex="-1">
+      <span data-i18n="view.preview">Preview</span>
+    </button>
+  </div>
+
+  <main class="workspace">
+    <section class="pane pane-editor" id="pane-editor" aria-labelledby="pane-editor-title">
+      <div class="pane-head">
+        <span class="pane-title" id="pane-editor-title" data-i18n="pane.editor">Markdown</span>
+        <span class="pane-meta" id="editor-stats">0 chars</span>
+      </div>
+      <textarea id="editor" spellcheck="false" placeholder="Type Markdown here…"
+                aria-label="Markdown editor" data-i18n-placeholder="editor.placeholder"
+                data-i18n-aria="editor.label"></textarea>
+    </section>
+
+    <div class="divider" id="divider" role="separator" aria-orientation="vertical" aria-hidden="true"></div>
+
+    <section class="pane pane-preview" id="pane-preview" aria-labelledby="pane-preview-title">
+      <div class="pane-head">
+        <span class="pane-title" id="pane-preview-title" data-i18n="pane.preview">Preview</span>
+      </div>
+      <div id="preview" class="markdown-body" tabindex="0"
+           aria-label="Rendered preview" data-i18n-aria="preview.label"><h1 id="markdown-a-complete-beginner-39-s-guide">Markdown: A Complete Beginner&#39;s Guide</h1>
+<blockquote>
+<p><strong>This is a hands-on Markdown tutorial — edit it as you read.</strong><br>The preview shows exactly what the source on the left renders to. Change something on the left and it updates instantly, so you can learn by poking at it and be productive in minutes.</p>
+</blockquote>
+<hr>
+<h2 id="what-is-markdown">What is Markdown?</h2>
+<p>Markdown is a <strong>lightweight markup language</strong> created in 2004 by John Gruber and Aaron Swartz. It marks up formatting with plain-text symbols that convert easily to HTML.</p>
+<p>Three reasons to use it:</p>
+<ul>
+<li><strong>Readable</strong> — the source is plain text, so it makes sense even before rendering</li>
+<li><strong>Quick to write</strong> — you stay on the content instead of reaching for a toolbar</li>
+<li><strong>Everywhere</strong> — GitHub, CMS editors, note apps (Obsidian / Notion / Bear) and most chat tools support it</li>
+</ul>
+<hr>
+<h2 id="1-headings">1. Headings</h2>
+<p>Start a line with <code>#</code>; the more hashes, the deeper the level:</p>
+<pre><code class="language-markdown"># Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+</code></pre>
+<blockquote>
+<p>Tip: keep one space after the <code>#</code>. Pick a heading level for its place in the document outline, not for how big it looks.</p>
+</blockquote>
+<h1 id="heading-1">Heading 1</h1>
+<h2 id="heading-2">Heading 2</h2>
+<h3 id="heading-3">Heading 3</h3>
+<hr>
+<h2 id="2-emphasis-bold-italic-strikethrough">2. Emphasis: bold / italic / strikethrough</h2>
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>**bold**</code></td>
+<td><strong>bold</strong></td>
+</tr>
+<tr>
+<td><code>*italic*</code></td>
+<td><em>italic</em></td>
+</tr>
+<tr>
+<td><code>~~strikethrough~~</code></td>
+<td><del>strikethrough</del></td>
+</tr>
+<tr>
+<td><code>***bold italic***</code></td>
+<td><em><strong>bold italic</strong></em></td>
+</tr>
+<tr>
+<td><code>`inline code`</code></td>
+<td><code>inline code</code></td>
+</tr>
+</tbody></table>
+<p>They also <strong>combine</strong>: <code>**bold with *italic* and ~~struck~~ text**</code> → <strong>bold with <em>italic</em> and <del>struck</del> text</strong></p>
+<hr>
+<h2 id="3-lists">3. Lists</h2>
+<h3 id="unordered">Unordered</h3>
+<p>Start each line with <code>-</code>, <code>*</code> or <code>+</code>:</p>
+<pre><code class="language-markdown">- First item
+- Second item
+- Third item
+</code></pre>
+<ul>
+<li>First item</li>
+<li>Second item</li>
+<li>Third item</li>
+</ul>
+<h3 id="ordered">Ordered</h3>
+<p>Start with a number and a dot:</p>
+<pre><code class="language-markdown">1. First step
+2. Second step
+3. Third step
+</code></pre>
+<ol>
+<li>First step</li>
+<li>Second step</li>
+<li>Third step</li>
+</ol>
+<h3 id="nested">Nested</h3>
+<p>Indent a sub-item by <strong>two spaces</strong>:</p>
+<pre><code class="language-markdown">1. Gather the ingredients
+   - 2 eggs
+   - 200 ml milk
+2. Cook everything
+   - 30 seconds on high heat
+   - then turn it down
+</code></pre>
+<ol>
+<li>Gather the ingredients<ul>
+<li>2 eggs</li>
+<li>200 ml milk</li>
+</ul>
+</li>
+<li>Cook everything<ul>
+<li>30 seconds on high heat</li>
+<li>then turn it down</li>
+</ul>
+</li>
+</ol>
+<h3 id="task-lists">Task lists</h3>
+<p>Add <code>[ ]</code> (open) or <code>[x]</code> (done) after the dash:</p>
+<pre><code class="language-markdown">- [x] Learn headings
+- [x] Learn lists
+- [ ] Learn tables
+- [ ] Learn code blocks
+</code></pre>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Learn headings</li>
+<li><input checked="" disabled="" type="checkbox"> Learn lists</li>
+<li><input disabled="" type="checkbox"> Learn tables</li>
+<li><input disabled="" type="checkbox"> Learn code blocks</li>
+</ul>
+<blockquote>
+<p>Tip: leave a space after <code>-</code>, <code>[</code> and <code>]</code>.</p>
+</blockquote>
+<hr>
+<h2 id="4-links">4. Links</h2>
+<h3 id="inline">Inline</h3>
+<pre><code class="language-markdown">[link text](https://example.com &quot;optional title&quot;)
+</code></pre>
+<p>For example: visit the <a href="https://www.youtube.com/@KylinTech" title="YouTube channel">KylinTech channel</a>.</p>
+<h3 id="autolinks">Autolinks</h3>
+<pre><code class="language-markdown">&lt;https://www.youtube.com/@KylinTech&gt;
+</code></pre>
+<p>Wrap a bare URL in angle brackets and it becomes a link:</p>
+<p><a href="https://www.youtube.com/@KylinTech">https://www.youtube.com/@KylinTech</a></p>
+<hr>
+<h2 id="5-images">5. Images</h2>
+<p>It&#39;s a link with a <code>!</code> in front:</p>
+<pre><code class="language-markdown">![alt text](path/to/image.png)
+</code></pre>
+<p>Example (this tutorial ships a local SVG, so it renders offline):</p>
+<p><img src="assets/markdown-demo.svg" alt="Markdown image example"></p>
+<blockquote>
+<p>Tip: the address can be a URL or a relative path. The alt text appears if the image fails to load.</p>
+</blockquote>
+<hr>
+<h2 id="6-blockquotes">6. Blockquotes</h2>
+<p>Start each line with <code>&gt;</code>, including every line of a multi-line quote:</p>
+<pre><code class="language-markdown">&gt; Learning without thought is labour lost;
+&gt; thought without learning is perilous.
+&gt;
+&gt; — Confucius
+</code></pre>
+<blockquote>
+<p>Learning without thought is labour lost;<br>thought without learning is perilous.</p>
+<p>— Confucius</p>
+</blockquote>
+<p>Quotes <strong>nest</strong>, giving you multi-level quotes:</p>
+<blockquote>
+<p>Level one</p>
+<blockquote>
+<p>Level two</p>
+<blockquote>
+<p>Level three</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<hr>
+<h2 id="7-code">7. Code</h2>
+<h3 id="inline-code">Inline code</h3>
+<p>Wrap it in backticks: <code>`print(&quot;hello&quot;)`</code> → <code>print(&quot;hello&quot;)</code></p>
+<h3 id="code-blocks">Code blocks</h3>
+<p>Fence the code with three backticks</p>
+<blockquote>
+<p>Always tag the language (e.g. ```python) — that turns on syntax highlighting and makes the code far easier to scan</p>
+</blockquote>
+<pre><code class="language-markdown">```python
+def greet(name):
+    &quot;&quot;&quot;Say hello to someone.&quot;&quot;&quot;
+    return f&quot;Hello, {name}!&quot;
+
+print(greet(&quot;world&quot;))
+```
+</code></pre>
+<p>Rendered:</p>
+<pre><code class="language-python">def greet(name):
+    &quot;&quot;&quot;Say hello to someone.&quot;&quot;&quot;
+    return f&quot;Hello, {name}!&quot;
+
+print(greet(&quot;world&quot;))
+</code></pre>
+<p>Some JavaScript:</p>
+<pre><code class="language-javascript">const fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;orange&quot;];
+fruits.map((f) =&gt; console.log(f));
+</code></pre>
+<p>And a shell session:</p>
+<pre><code class="language-bash">git init
+git add .
+git commit -m &quot;first commit&quot;
+</code></pre>
+<hr>
+<h2 id="8-tables">8. Tables</h2>
+<p>Split columns with <code>|</code> and separate the header row with <code>-</code>. Colons set the alignment:</p>
+<pre><code class="language-markdown">| Feature | Left | Right | Center |
+| :--- | :--- | ---: | :---: |
+| Headings | `#` | up to 6 levels | ✓ |
+| Lists | `-` / `1.` | nestable | ✓ |
+| Code | backticks | highlighted | ✓ |
+</code></pre>
+<table>
+<thead>
+<tr>
+<th align="left">Feature</th>
+<th align="left">Left</th>
+<th align="right">Right</th>
+<th align="center">Center</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Headings</td>
+<td align="left"><code>#</code></td>
+<td align="right">up to 6 levels</td>
+<td align="center">✓</td>
+</tr>
+<tr>
+<td align="left">Lists</td>
+<td align="left"><code>-</code> / <code>1.</code></td>
+<td align="right">nestable</td>
+<td align="center">✓</td>
+</tr>
+<tr>
+<td align="left">Code</td>
+<td align="left">backticks</td>
+<td align="right">highlighted</td>
+<td align="center">✓</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="9-horizontal-rules">9. Horizontal rules</h2>
+<p>Three or more <code>-</code>, <code>*</code> or <code>_</code> on a line of their own:</p>
+<pre><code class="language-markdown">---
+</code></pre>
+<hr>
+<h2 id="10-escaping">10. Escaping</h2>
+<p>To show a marker <strong>literally</strong>, put a backslash <code>\</code> in front of it:</p>
+<pre><code class="language-markdown">\*not italic\*
+\# not a heading
+</code></pre>
+<p>*not italic*<br># not a heading</p>
+<hr>
+<h2 id="11-best-practices">11. Best practices</h2>
+<ol>
+<li><strong>One <code>#</code> per document</strong> — reserve it for the title and start sections at <code>##</code></li>
+<li><strong>Pick one bullet</strong> — use <code>-</code> throughout or <code>*</code> throughout; don&#39;t mix <code>-</code>, <code>*</code> and <code>+</code></li>
+<li><strong>Give fences room</strong> — a blank line before and after a code block is the most portable choice</li>
+</ol>
+<hr>
+<h2 id="wrapping-up">Wrapping up</h2>
+<p>What you&#39;re reading <em>is</em> a working Markdown lesson. <strong>Edit on the left, watch on the right</strong> — try every syntax here once and you&#39;re past the beginner stage.</p>
+</div>
+    </section>
+  </main>
+
+  <div class="scrim" id="scrim" aria-hidden="true"></div>
+  <aside class="settings" id="settings" role="dialog" aria-modal="true"
+         aria-labelledby="settings-title" aria-hidden="true" inert>
+    <div class="settings-head">
+      <h2 id="settings-title" data-i18n="settings.title">Settings</h2>
+      <button type="button" class="close" id="settings-close"
+              aria-label="Close settings" data-i18n-aria="settings.close">✕</button>
+    </div>
+    <div class="settings-body">
+      <div class="setting-row">
+        <div class="setting-info">
+          <label for="opt-sync" data-i18n="settings.syncScroll">Sync scroll</label>
+          <p data-i18n="settings.syncScrollDesc">Link editor and preview scroll positions</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="opt-sync">
+          <span class="slider" aria-hidden="true"></span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <div class="setting-info">
+          <span class="setting-label" data-i18n="settings.theme">Theme</span>
+        </div>
+        <div class="segmented" id="opt-theme" role="group" aria-labelledby="settings-title">
+          <button type="button" data-theme-opt="light" data-i18n="settings.themeLight" aria-pressed="false" title="Light">Light</button>
+          <button type="button" data-theme-opt="dark" data-i18n="settings.themeDark" aria-pressed="false" title="Dark">Dark</button>
+          <button type="button" data-theme-opt="auto" data-i18n="settings.themeAuto" aria-pressed="false" title="Auto">Auto</button>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <div class="setting-info">
+          <label for="opt-fontsize" data-i18n="settings.fontSize">Font size</label>
+        </div>
+        <select id="opt-fontsize">
+          <option value="13">13px</option>
+          <option value="14" selected>14px</option>
+          <option value="16">16px</option>
+          <option value="18">18px</option>
+          <option value="20">20px</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <div class="setting-info">
+          <label for="opt-lang" data-i18n="settings.language">Language</label>
+          <p data-i18n="settings.languageDesc">UI language and tutorial language</p>
+        </div>
+        <select id="opt-lang">
+          <option value="en" data-i18n="settings.langEn">English</option>
+          <option value="zh" data-i18n="settings.langZh">简体中文</option>
+          <option value="zh-Hant" data-i18n="settings.langHant">繁體中文</option>
+        </select>
+      </div>
+
+      <div class="settings-about">
+        <p class="settings-about-line">
+          <span class="settings-about-name" data-i18n="app.title">KylinMD Editor</span>
+          <span class="settings-about-ver">v1.0.0</span>
+        </p>
+        <p class="settings-about-line">
+          <a href="https://www.youtube.com/@KylinTech" target="_blank" rel="noopener noreferrer">YouTube @KylinTech</a>
+        </p>
+      </div>
+    </div>
+  </aside>
+
+  <input type="file" id="file-input" accept=".md,.markdown,.txt,text/markdown" hidden>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="lib/marked.min.js"></script>
+  <script src="lib/highlight.min.js"></script>
+  <script src="lib/purify.min.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/toolbar.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

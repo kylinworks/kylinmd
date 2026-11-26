@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>KylinMD · Markdown 線上編輯器</title>
+  <meta name="description" content="KylinMD 是免費的線上 Markdown 編輯器，支援即時預覽與 Markdown、PDF、Word、HTML 匯出，可離線使用。">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="assets/md-logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/md-logo.png" sizes="180x180">
+  <link rel="canonical" href="zh-hant.html">
+  <link rel="alternate" hreflang="en" href="./">
+  <link rel="alternate" hreflang="zh-Hans" href="zh.html">
+  <link rel="alternate" hreflang="zh-Hant" href="zh-hant.html">
+  <link rel="alternate" hreflang="x-default" href="./">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="KylinMD Editor">
+  <meta property="og:title" content="KylinMD · Markdown 線上編輯器">
+  <meta property="og:description" content="KylinMD 是免費的線上 Markdown 編輯器，支援即時預覽與 Markdown、PDF、Word、HTML 匯出，可離線使用。">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"KylinMD Editor","alternateName":"Markdown 線上編輯器","description":"KylinMD 是免費的線上 Markdown 編輯器，支援即時預覽與 Markdown、PDF、Word、HTML 匯出，可離線使用。","applicationCategory":"ProductivityApplication","operatingSystem":"Web","inLanguage":"zh-Hant","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="lib/github.min.css" id="hljs-light">
+  <link rel="stylesheet" href="lib/github-dark.min.css" id="hljs-dark" disabled>
+</head>
+<body data-view="preview">
+  <a class="skip-link" href="#editor" data-i18n="a11y.skip">跳到編輯器</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="assets/md-logo.svg" alt="" width="34" height="34" decoding="async">
+      <div class="brand-text">
+        <h1 data-i18n="app.title">KylinMD Editor</h1>
+        <p data-i18n="app.subtitle">線上編輯器 · 即時預覽</p>
+      </div>
+    </div>
+
+    <div class="toolbar" id="toolbar" role="toolbar" aria-orientation="horizontal"
+         aria-label="編輯工具列" data-i18n-aria="tb.toolbar">
+      <div class="tb-group">
+        <button type="button" class="tb-btn" data-action="h1" data-i18n-title="tb.h1" data-i18n-aria="tb.h1" data-aria-prefix="text" title="一級標題">H1</button>
+        <button type="button" class="tb-btn" data-action="h2" data-i18n-title="tb.h2" data-i18n-aria="tb.h2" data-aria-prefix="text" title="二級標題">H2</button>
+        <button type="button" class="tb-btn" data-action="h3" data-i18n-title="tb.h3" data-i18n-aria="tb.h3" data-aria-prefix="text" title="三級標題">H3</button>
+      </div>
+      <div class="tb-group">
+        <button type="button" class="tb-btn tb-b" data-action="bold" data-i18n-title="tb.bold" data-i18n-aria="tb.bold" data-aria-prefix="text" title="粗體">B</button>
+        <button type="button" class="tb-btn tb-i" data-action="italic" data-i18n-title="tb.italic" data-i18n-aria="tb.italic" data-aria-prefix="text" title="斜體">I</button>
+        <button type="button" class="tb-btn tb-s" data-action="strike" data-i18n-title="tb.strike" data-i18n-aria="tb.strike" data-aria-prefix="text" title="刪除線">S</button>
+        <button type="button" class="tb-btn tb-mono" data-action="code" data-i18n-title="tb.code" data-i18n-aria="tb.code" data-aria-prefix="text" title="行內程式碼">&lt;/&gt;</button>
+      </div>
+      <div class="tb-group">
+        <button type="button" class="tb-btn" data-action="link" data-i18n-title="tb.link" data-i18n-aria="tb.link" data-aria-prefix="text" title="插入連結"><span data-i18n="tb.linkLabel">連結</span></button>
+        <button type="button" class="tb-btn" data-action="image" data-i18n-title="tb.image" data-i18n-aria="tb.image" data-aria-prefix="text" title="插入圖片"><span data-i18n="tb.imageLabel">圖片</span></button>
+        <button type="button" class="tb-btn" data-action="quote" data-i18n-title="tb.quote" data-i18n-aria="tb.quote" data-aria-prefix="text" title="引用"><span data-i18n="tb.quoteLabel">引用</span></button>
+      </div>
+      <div class="tb-group">
+        <button type="button" class="tb-btn" data-action="ul" data-i18n-title="tb.ul" data-i18n-aria="tb.ul" data-aria-prefix="text" title="項目符號清單"><span data-i18n="tb.ulLabel">項目</span></button>
+        <button type="button" class="tb-btn" data-action="ol" data-i18n-title="tb.ol" data-i18n-aria="tb.ol" data-aria-prefix="text" title="編號清單"><span data-i18n="tb.olLabel">編號</span></button>
+        <button type="button" class="tb-btn" data-action="task" data-i18n-title="tb.task" data-i18n-aria="tb.task" data-aria-prefix="text" title="待辦清單"><span data-i18n="tb.taskLabel">待辦</span></button>
+        <button type="button" class="tb-btn" data-action="table" data-i18n-title="tb.table" data-i18n-aria="tb.table" data-aria-prefix="text" title="插入表格"><span data-i18n="tb.tableLabel">表格</span></button>
+        <button type="button" class="tb-btn" data-action="codeblock" data-i18n-title="tb.codeblock" data-i18n-aria="tb.codeblock" data-aria-prefix="text" title="程式碼區塊"><span data-i18n="tb.codeblockLabel">程式碼</span></button>
+        <button type="button" class="tb-btn" data-action="hr" data-i18n-title="tb.hr" data-i18n-aria="tb.hr" data-aria-prefix="text" title="分隔線"><span data-i18n="tb.hrLabel">分隔線</span></button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="dropdown" id="file-dropdown">
+        <button type="button" class="btn btn-ghost" id="btn-file"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="file-menu">
+          <span data-i18n="file.title">檔案</span>
+          <svg class="caret" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" focusable="false"><path d="M3.6 6.1 8 10.4l4.4-4.3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown-menu" id="file-menu" role="menu" aria-labelledby="btn-file">
+          <button type="button" class="dropdown-item" data-file="open" role="menuitem" tabindex="-1">
+            <span class="item-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h4l2 2h9a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 19.5 20h-15A1.5 1.5 0 0 1 3 18.5z"/><path d="M3 10.5h18"/></svg>
+            </span><span data-i18n="file.open">開啟本機檔案</span>
+          </button>
+          <button type="button" class="dropdown-item" data-file="clear" role="menuitem" tabindex="-1">
+            <span class="item-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M4 7h16"/><path d="M9.5 7V5.5A1.5 1.5 0 0 1 11 4h2a1.5 1.5 0 0 1 1.5 1.5V7"/><path d="M6.5 7l.8 11.2A1.8 1.8 0 0 0 9.1 20h5.8a1.8 1.8 0 0 0 1.8-1.8L17.5 7"/><path d="M10.5 11v5M13.5 11v5"/></svg>
+            </span><span data-i18n="file.clear">清空內容</span>
+          </button>
+          <button type="button" class="dropdown-item" data-file="reset" role="menuitem" tabindex="-1">
+            <span class="item-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M4 5.5v5h5"/><path d="M4.6 10.4A7.5 7.5 0 1 1 5 15.5"/></svg>
+            </span><span data-i18n="file.reset">還原預設內容</span>
+          </button>
+        </div>
+      </div>
+      <div class="dropdown" id="export-dropdown">
+        <button type="button" class="btn btn-primary" id="btn-export"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="export-menu">
+          <span data-i18n="export.title">匯出</span>
+          <svg class="caret" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" focusable="false"><path d="M3.6 6.1 8 10.4l4.4-4.3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown-menu" id="export-menu" role="menu" aria-labelledby="btn-export">
+          <button type="button" class="dropdown-item" data-export="md" role="menuitem" tabindex="-1">
+            <span class="item-ico" aria-hidden="true">MD</span><span data-i18n="export.md">Markdown (.md)</span>
+          </button>
+          <button type="button" class="dropdown-item" data-export="pdf" role="menuitem" tabindex="-1">
+            <span class="item-ico" aria-hidden="true">PDF</span><span data-i18n="export.pdf">PDF (.pdf)</span>
+          </button>
+          <button type="button" class="dropdown-item" data-export="word" role="menuitem" tabindex="-1">
+            <span class="item-ico" aria-hidden="true">W</span><span data-i18n="export.word">Word (.docx)</span>
+          </button>
+          <button type="button" class="dropdown-item" data-export="html" role="menuitem" tabindex="-1">
+            <span class="item-ico item-ico-sm" aria-hidden="true">HTML</span><span data-i18n="export.html">HTML (.html)</span>
+          </button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-ghost" id="btn-settings"
+              aria-label="設定" data-i18n-aria="settings.title" aria-haspopup="dialog">
+        <svg class="gear" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.61-.22l-2.39.96a7.03 7.03 0 0 0-1.62-.94l-.36-2.54A.5.5 0 0 0 13.9 2h-3.8a.5.5 0 0 0-.49.42l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96a.5.5 0 0 0-.61.22L2.71 8.48a.5.5 0 0 0 .12.64l2.03 1.58c-.05.3-.07.62-.07.94 0 .32.02.64.07.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.14.23.4.32.61.22l2.39-.96c.49.38 1.03.7 1.62.94l.36 2.54c.05.24.26.42.49.42h3.8c.24 0 .44-.18.49-.42l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.1.47 0 .61-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2Z"/></svg>
+        <span class="btn-label" data-i18n="settings.title">設定</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="view-switch" id="view-switch" role="group"
+       aria-label="檢視切換" data-i18n-aria="view.label">
+    <button type="button" class="vs-btn" data-view="editor" aria-pressed="false"
+            aria-controls="pane-editor" tabindex="-1">
+      <span data-i18n="view.editor">編輯</span>
+    </button>
+    <button type="button" class="vs-btn" data-view="preview" aria-pressed="true"
+            aria-controls="pane-preview" tabindex="-1">
+      <span data-i18n="view.preview">預覽</span>
+    </button>
+  </div>
+
+  <main class="workspace">
+    <section class="pane pane-editor" id="pane-editor" aria-labelledby="pane-editor-title">
+      <div class="pane-head">
+        <span class="pane-title" id="pane-editor-title" data-i18n="pane.editor">Markdown</span>
+        <span class="pane-meta" id="editor-stats">0 chars</span>
+      </div>
+      <textarea id="editor" spellcheck="false" placeholder="在這裡輸入 Markdown…"
+                aria-label="Markdown 編輯器" data-i18n-placeholder="editor.placeholder"
+                data-i18n-aria="editor.label"></textarea>
+    </section>
+
+    <div class="divider" id="divider" role="separator" aria-orientation="vertical" aria-hidden="true"></div>
+
+    <section class="pane pane-preview" id="pane-preview" aria-labelledby="pane-preview-title">
+      <div class="pane-head">
+        <span class="pane-title" id="pane-preview-title" data-i18n="pane.preview">預覽</span>
+      </div>
+      <div id="preview" class="markdown-body" tabindex="0"
+           aria-label="預覽結果" data-i18n-aria="preview.label"><h1 id="markdown-完全入門指南">Markdown 完全入門指南</h1>
+<blockquote>
+<p><strong>這是一份可直接複製修改的繁體中文 Markdown 教學。</strong><br>你現在看到的預覽，正是左邊這份原始碼的呈現結果。改一改左邊，右邊立刻變——邊看邊練，幾分鐘就能上手。</p>
+</blockquote>
+<hr>
+<h2 id="什麼是-markdown">什麼是 Markdown？</h2>
+<p>Markdown 是一種<strong>輕量級標記語言</strong>，2004 年由 John Gruber 與 Aaron Swartz 建立。它用純文字符號標記格式，可被輕鬆轉換成 HTML。</p>
+<p>選它的三個理由：</p>
+<ul>
+<li><strong>易讀</strong>：原始碼就是純文字，不渲染也能看懂</li>
+<li><strong>易寫</strong>：專注內容，不被排版打斷</li>
+<li><strong>通用</strong>：GitHub、內容平台編輯器、筆記軟體（Obsidian / Notion / 語雀）等均支援</li>
+</ul>
+<hr>
+<h2 id="1-標題">1. 標題</h2>
+<p>用 <code>#</code> 標記層級，數量越多，層級越深：</p>
+<pre><code class="language-markdown"># 一級標題
+## 二級標題
+### 三級標題
+#### 四級標題
+##### 五級標題
+###### 六級標題
+</code></pre>
+<blockquote>
+<p>提示：<code>#</code> 後面要留一個空格。依文章結構選擇正確的標題層級，而非顯示樣式。</p>
+</blockquote>
+<h1 id="一級標題">一級標題</h1>
+<h2 id="二級標題">二級標題</h2>
+<h3 id="三級標題">三級標題</h3>
+<hr>
+<h2 id="2-強調-粗體-斜體-刪除線">2. 強調：粗體 / 斜體 / 刪除線</h2>
+<table>
+<thead>
+<tr>
+<th>寫法</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>**粗體**</code></td>
+<td><strong>粗體</strong></td>
+</tr>
+<tr>
+<td><code>*斜體*</code></td>
+<td><em>斜體</em></td>
+</tr>
+<tr>
+<td><code>~~刪除線~~</code></td>
+<td><del>刪除線</del></td>
+</tr>
+<tr>
+<td><code>***粗斜體***</code></td>
+<td><em><strong>粗斜體</strong></em></td>
+</tr>
+<tr>
+<td><code>`行內程式碼`</code></td>
+<td><code>行內程式碼</code></td>
+</tr>
+</tbody></table>
+<p>也可以<strong>自由組合</strong>：<code>**粗體裡帶 *斜體* 和 ~~刪除~~**</code> → <strong>粗體裡帶 <em>斜體</em> 和 <del>刪除</del></strong></p>
+<hr>
+<h2 id="3-清單">3. 清單</h2>
+<h3 id="項目符號清單">項目符號清單</h3>
+<p>用 <code>-</code>、<code>*</code> 或 <code>+</code> 開頭：</p>
+<pre><code class="language-markdown">- 第一項
+- 第二項
+- 第三項
+</code></pre>
+<ul>
+<li>第一項</li>
+<li>第二項</li>
+<li>第三項</li>
+</ul>
+<h3 id="編號清單">編號清單</h3>
+<p>用 <code>數字 + .</code> 開頭：</p>
+<pre><code class="language-markdown">1. 第一步
+2. 第二步
+3. 第三步
+</code></pre>
+<ol>
+<li>第一步</li>
+<li>第二步</li>
+<li>第三步</li>
+</ol>
+<h3 id="巢狀清單">巢狀清單</h3>
+<p>子項目前面<strong>縮排兩個空格</strong>即可：</p>
+<pre><code class="language-markdown">1. 準備食材
+   - 雞蛋 ×2
+   - 牛奶 200ml
+2. 下鍋翻炒
+   - 大火 30 秒
+   - 轉小火
+</code></pre>
+<ol>
+<li>準備食材<ul>
+<li>雞蛋 ×2</li>
+<li>牛奶 200ml</li>
+</ul>
+</li>
+<li>下鍋翻炒<ul>
+<li>大火 30 秒</li>
+<li>轉小火</li>
+</ul>
+</li>
+</ol>
+<h3 id="待辦清單">待辦清單</h3>
+<p>在 <code>-</code> 後加 <code>[ ]</code>（未完成）或 <code>[x]</code>（已完成）：</p>
+<pre><code class="language-markdown">- [x] 學會標題
+- [x] 學會清單
+- [ ] 學會表格
+- [ ] 學會程式碼區塊
+</code></pre>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 學會標題</li>
+<li><input checked="" disabled="" type="checkbox"> 學會清單</li>
+<li><input disabled="" type="checkbox"> 學會表格</li>
+<li><input disabled="" type="checkbox"> 學會程式碼區塊</li>
+</ul>
+<blockquote>
+<p>提示：<code>-</code> <code>[</code> <code>]</code> 後面要留一個空格。</p>
+</blockquote>
+<hr>
+<h2 id="4-連結">4. 連結</h2>
+<h3 id="行內式">行內式</h3>
+<pre><code class="language-markdown">[顯示文字](連結位址 &quot;可選標題&quot;)
+</code></pre>
+<p>例如：造訪 <a href="https://www.youtube.com/@KylinTech" title="YouTube 頻道">KylinTech 頻道</a>。</p>
+<h3 id="自動連結">自動連結</h3>
+<pre><code class="language-markdown">&lt;https://www.youtube.com/@KylinTech&gt;
+</code></pre>
+<p>用尖括號包住 URL，直接顯示成連結：</p>
+<p><a href="https://www.youtube.com/@KylinTech">https://www.youtube.com/@KylinTech</a></p>
+<hr>
+<h2 id="5-圖片">5. 圖片</h2>
+<p>語法是連結前面加一個 <code>!</code>：</p>
+<pre><code class="language-markdown">![替代文字](圖片位址)
+</code></pre>
+<p>範例（本教學內建一張本機 SVG 圖片，無需連網即可顯示）：</p>
+<p><img src="assets/markdown-demo.svg" alt="Markdown image example"></p>
+<blockquote>
+<p>提示：圖片位址可以是網路 URL，也可以是相對路徑。替代文字在圖片載入失敗時會顯示出來。</p>
+</blockquote>
+<hr>
+<h2 id="6-引用">6. 引用</h2>
+<p>用 <code>&gt;</code> 開頭，多行引用每行都要加：</p>
+<pre><code class="language-markdown">&gt; 學而不思則罔，思而不學則殆。
+&gt;
+&gt; —— 孔子
+</code></pre>
+<blockquote>
+<p>學而不思則罔，思而不學則殆。</p>
+<p>—— 孔子</p>
+</blockquote>
+<p><code>&gt;</code> 可以<strong>層層巢狀</strong>，實現多層引用：</p>
+<blockquote>
+<p>第一層</p>
+<blockquote>
+<p>第二層</p>
+<blockquote>
+<p>第三層</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<hr>
+<h2 id="7-程式碼">7. 程式碼</h2>
+<h3 id="行內程式碼">行內程式碼</h3>
+<p>用反引號包住：<code>`print(&quot;hello&quot;)`</code> → <code>print(&quot;hello&quot;)</code></p>
+<h3 id="程式碼區塊">程式碼區塊</h3>
+<p>用三個反引號圍住程式碼</p>
+<blockquote>
+<p>程式碼區塊務必標註語言（如 ```python），能啟用語法高亮，大幅提升程式碼的可讀性</p>
+</blockquote>
+<pre><code class="language-markdown">```python
+def greet(name):
+    &quot;&quot;&quot;向某人問好&quot;&quot;&quot;
+    return f&quot;你好，{name}！&quot;
+
+print(greet(&quot;世界&quot;))
+```
+</code></pre>
+<p>呈現效果：</p>
+<pre><code class="language-python">def greet(name):
+    &quot;&quot;&quot;向某人問好&quot;&quot;&quot;
+    return f&quot;你好，{name}！&quot;
+
+print(greet(&quot;世界&quot;))
+</code></pre>
+<p>再來看一段 JavaScript：</p>
+<pre><code class="language-javascript">const items = [&quot;蘋果&quot;, &quot;香蕉&quot;, &quot;橘子&quot;];
+items.map((v) =&gt; console.log(v));
+</code></pre>
+<p>以及一段命令列：</p>
+<pre><code class="language-bash">git init
+git add .
+git commit -m &quot;初次提交&quot;
+</code></pre>
+<hr>
+<h2 id="8-表格">8. 表格</h2>
+<p>用 <code>|</code> 分欄，<code>-</code> 分隔表頭。冒號決定對齊方式：</p>
+<pre><code class="language-markdown">| 功能 | 左對齊 | 右對齊 | 置中 |
+| :--- | :--- | ---: | :---: |
+| 標題 | `#` | 支援 6 級 | ✓ |
+| 清單 | `-` / `1.` | 可巢狀 | ✓ |
+| 程式碼 | 反引號 | 高亮 | ✓ |
+</code></pre>
+<table>
+<thead>
+<tr>
+<th align="left">功能</th>
+<th align="left">左對齊</th>
+<th align="right">右對齊</th>
+<th align="center">置中</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">標題</td>
+<td align="left"><code>#</code></td>
+<td align="right">支援 6 級</td>
+<td align="center">✓</td>
+</tr>
+<tr>
+<td align="left">清單</td>
+<td align="left"><code>-</code> / <code>1.</code></td>
+<td align="right">可巢狀</td>
+<td align="center">✓</td>
+</tr>
+<tr>
+<td align="left">程式碼</td>
+<td align="left">反引號</td>
+<td align="right">高亮</td>
+<td align="center">✓</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="9-分隔線">9. 分隔線</h2>
+<p>三個以上 <code>-</code>、<code>*</code> 或 <code>_</code> 單獨成行：</p>
+<pre><code class="language-markdown">---
+</code></pre>
+<hr>
+<h2 id="10-跳脫字元">10. 跳脫字元</h2>
+<p>想讓標記符號<strong>按原樣顯示</strong>，前面加反斜線 <code>\</code>：</p>
+<pre><code class="language-markdown">\*這不是斜體\*
+\# 這不是標題
+</code></pre>
+<p>*這不是斜體*<br># 這不是標題</p>
+<hr>
+<h2 id="11-最佳實務">11. 最佳實務</h2>
+<ol>
+<li><strong>標題層級</strong>：<code>#</code> 只留一個（即文章標題），正文從 <code>##</code> 開始</li>
+<li><strong>統一符號</strong>：項目符號清單建議用 <code>-</code> 或全程用 <code>*</code>，別 <code>-</code> <code>*</code> <code>+</code> 混用</li>
+<li><strong>程式碼圍欄</strong>：程式碼區塊前後各留一個空行，相容性最好</li>
+</ol>
+<hr>
+<h2 id="結語">結語</h2>
+<p>你正在閱讀的這份文件，本身就是一份可運行的 Markdown 教學。<strong>左邊改、右邊看</strong>，把每個語法都試一遍，你就算真正入門了。</p>
+</div>
+    </section>
+  </main>
+
+  <div class="scrim" id="scrim" aria-hidden="true"></div>
+  <aside class="settings" id="settings" role="dialog" aria-modal="true"
+         aria-labelledby="settings-title" aria-hidden="true" inert>
+    <div class="settings-head">
+      <h2 id="settings-title" data-i18n="settings.title">Settings</h2>
+      <button type="button" class="close" id="settings-close"
+              aria-label="關閉設定" data-i18n-aria="settings.close">✕</button>
+    </div>
+    <div class="settings-body">
+      <div class="setting-row">
+        <div class="setting-info">
+          <label for="opt-sync" data-i18n="settings.syncScroll">同步捲動</label>
+          <p data-i18n="settings.syncScrollDesc">編輯區與預覽區捲動位置連動</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="opt-sync">
+          <span class="slider" aria-hidden="true"></span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <div class="setting-info">
+          <span class="setting-label" data-i18n="settings.theme">主題</span>
+        </div>
+        <div class="segmented" id="opt-theme" role="group" aria-labelledby="settings-title">
+          <button type="button" data-theme-opt="light" data-i18n="settings.themeLight" aria-pressed="false" title="Light">淺色</button>
+          <button type="button" data-theme-opt="dark" data-i18n="settings.themeDark" aria-pressed="false" title="Dark">深色</button>
+          <button type="button" data-theme-opt="auto" data-i18n="settings.themeAuto" aria-pressed="false" title="Auto">自動</button>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <div class="setting-info">
+          <label for="opt-fontsize" data-i18n="settings.fontSize">字型大小</label>
+        </div>
+        <select id="opt-fontsize">
+          <option value="13">13px</option>
+          <option value="14" selected>14px</option>
+          <option value="16">16px</option>
+          <option value="18">18px</option>
+          <option value="20">20px</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <div class="setting-info">
+          <label for="opt-lang" data-i18n="settings.language">語言</label>
+          <p data-i18n="settings.languageDesc">介面與教學使用的語言</p>
+        </div>
+        <select id="opt-lang">
+          <option value="en" data-i18n="settings.langEn">English</option>
+          <option value="zh" data-i18n="settings.langZh">简体中文</option>
+          <option value="zh-Hant" data-i18n="settings.langHant">繁體中文</option>
+        </select>
+      </div>
+
+      <div class="settings-about">
+        <p class="settings-about-line">
+          <span class="settings-about-name" data-i18n="app.title">KylinMD Editor</span>
+          <span class="settings-about-ver">v1.0.0</span>
+        </p>
+        <p class="settings-about-line">
+          <a href="https://www.youtube.com/@KylinTech" target="_blank" rel="noopener noreferrer">YouTube @KylinTech</a>
+        </p>
+      </div>
+    </div>
+  </aside>
+
+  <input type="file" id="file-input" accept=".md,.markdown,.txt,text/markdown" hidden>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="lib/marked.min.js"></script>
+  <script src="lib/highlight.min.js"></script>
+  <script src="lib/purify.min.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/toolbar.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
