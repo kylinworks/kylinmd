@@ -9,6 +9,28 @@
 const Renderer = (() => {
   marked.setOptions({ gfm: true, breaks: true });
 
+  /* ---------- ==高亮== → <mark> ----------
+   * GFM 没有这个语法（Obsidian / Typora / 飞书都支持），用 marked 的行内扩展补上。
+   * 走官方扩展接口而不是「渲染前字符串替换」，这样代码块、行内代码里的 == 不会被误伤。
+   */
+  marked.use({
+    extensions: [
+      {
+        name: "highlight",
+        level: "inline",
+        start(src) { return src.indexOf("=="); },
+        tokenizer(src) {
+          // 内容不能以空白开头或结尾，避免把 "x == y == z" 这种普通文本吃掉
+          const m = /^==(?=\S)([\s\S]*?\S)==/.exec(src);
+          if (m) return { type: "highlight", raw: m[0], tokens: this.lexer.inlineTokens(m[1]) };
+        },
+        renderer(token) {
+          return "<mark>" + this.parser.parseInline(token.tokens) + "</mark>";
+        }
+      }
+    ]
+  });
+
   /* ---------- 净化 ----------
    * 用 DOMPurify（lib/purify.min.js，本地 vendor）；万一它没加载成功，
    * 退回到同一份白名单的 DOM 版兜底，绝不放行原始 HTML。

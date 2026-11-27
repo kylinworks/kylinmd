@@ -192,6 +192,15 @@ button { font-family: inherit; cursor: pointer; }
 .tb-i { font-style: italic; }
 .tb-s { text-decoration: line-through; }
 .tb-mono { font-family: var(--font-mono); font-size: 12px; }
+/* 高亮按钮：黄色下划线当荧光笔暗示，长度自然贴合 H 字形，不占背景层 */
+.tb-mark {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: #ffe066;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 2px;
+}
+[data-theme="dark"] .tb-mark { text-decoration-color: #c9a227; }
 
 /* ===== 窄屏视图切换（宽屏隐藏） ===== */
 .view-switch { display: none; }

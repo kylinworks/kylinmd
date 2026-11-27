@@ -38,13 +38,14 @@ Start a line with `#`; the more hashes, the deeper the level:
 
 ---
 
-## 2. Emphasis: bold / italic / strikethrough
+## 2. Emphasis: bold / italic / strikethrough / highlight
 
 | Syntax | Result |
 | --- | --- |
 | `**bold**` | **bold** |
 | `*italic*` | *italic* |
 | `~~strikethrough~~` | ~~strikethrough~~ |
+| `==highlight==` | ==highlight== |
 | `***bold italic***` | ***bold italic*** |
 | `` `inline code` `` | `inline code` |
 

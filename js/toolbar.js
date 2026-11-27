@@ -70,6 +70,7 @@ const Toolbar = (() => {
     bold: () => wrap("**", "**", "加粗文字"),
     italic: () => wrap("*", "*", "斜体文字"),
     strike: () => wrap("~~", "~~", "删除文字"),
+    mark: () => wrap("==", "==", "高亮文字"),
     code: () => wrap("`", "`", "行内代码"),
     link: () => wrap("[", "](https://example.com)", "链接文字"),
     image: () => wrap("![", "](https://example.com/image.png)", "图片描述"),
